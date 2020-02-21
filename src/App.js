@@ -22,15 +22,15 @@ function App() {
         console.log('inc ' + id);
         const index = counters.findIndex(el => el.id === id);
         const newCounts = [...counters];
-            newCounts[index].count = newCounts[index].count + 1;
+        newCounts[index].count = newCounts[index].count + 1;
         setCounters(newCounts);
     };
     const decrement = (id) => {
         console.log('dec ' + id);
-        const index = counters.findIndex(el => el.id === id);
-        const newCounts = [...counters];
-
-        newCounts[index].count = newCounts[index].count - 1;
+        const newCounts = counters.map(el => {
+            if(el.id === id) return {...el, count: el.count - 1 };
+            else el;
+        });
         setCounters(newCounts);
     };
 
