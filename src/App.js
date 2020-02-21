@@ -29,7 +29,7 @@ function App() {
         console.log('dec ' + id);
         const newCounts = counters.map(el => {
             if(el.id === id) return {...el, count: el.count - 1 };
-            else el;
+            return el;
         });
         setCounters(newCounts);
     };
