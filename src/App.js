@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import Counter from "./Counter";
+import AddCounterForm from "./AddCounterForm";
 
 function App() {
     const InitialCountersState = [
@@ -18,20 +19,33 @@ function App() {
         setCounters(newCounters);
     };
 
-    const increment = (id) => {
+    const incrementCounter = (id) => {
         console.log('inc ' + id);
         const index = counters.findIndex(el => el.id === id);
-        const newCounts = [...counters];
-        newCounts[index].count = newCounts[index].count + 1;
-        setCounters(newCounts);
+        const newCounters = [...counters];
+        newCounters[index].count = newCounters[index].count + 1;
+        setCounters(newCounters);
     };
-    const decrement = (id) => {
+    const decrementCounter = (id) => {
         console.log('dec ' + id);
-        const newCounts = counters.map(el => {
+        const newCounters = counters.map(el => {
             if(el.id === id) return {...el, count: el.count - 1 };
             return el;
         });
-        setCounters(newCounts);
+        setCounters(newCounters);
+    };
+    const removeCounter = (id) => {
+        const newCounters = counters.filter(el => el.id !==id);
+        setCounters(newCounters);
+    };
+    const addCounter = (name, count) => {
+        const newCounter = [...counters, {
+            id: Math.random(),
+            name,
+            count: Number(count)
+        }];
+        setCounters(newCounter);
+
     };
 
   return (
@@ -44,8 +58,10 @@ function App() {
                                      id={el.id}
                                      name={el.name}
                                      count={el.count}
-                                     increment={increment}
-                                     decrement={decrement} />)}
+                                     increment={incrementCounter}
+                                     decrement={decrementCounter}
+                                     remove={removeCounter} />)}
+        <AddCounterForm onSubmit={addCounter} />
 
     </div>
   );
