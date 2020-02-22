@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import Counter from "./Counter";
 import AddCounterForm from "./AddCounterForm";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
 function App() {
     const InitialCountersState = [
@@ -53,6 +54,7 @@ function App() {
         <h1>Counter</h1>
         Total: {counters.reduce((acc, cur) => acc + cur.count, 0)}
         <button onClick={resetTotalCount} className='btn btn-danger'>Reset total count</button>
+
         <hr/>
         {counters.map(el => <Counter key={el.id}
                                      id={el.id}
